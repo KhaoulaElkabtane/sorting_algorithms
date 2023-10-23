@@ -16,7 +16,7 @@ void swap_ints(int *s, int *i)
 }
 
 /**
- * quick_sort - Sorts an array using the Quick Sort algorithm.
+ * shell_sort - Sorts an array using the Shell Sort algorithm.
  * @array: Pointer to the array to be sorted.
  * @size: Number of elements in the array.
  * Return : Nothing.
