@@ -13,11 +13,11 @@ void quick_sort(int *array, size_t size);
  */
 void swap_ints(int *s, int *i)
 {
-        int tm;
+	int tm;
 
-        tm = *s;
-        *s = *i;
-        *i = tm;
+	tm = *s;
+	*s = *i;
+	*i = tm;
 }
 
 /**
