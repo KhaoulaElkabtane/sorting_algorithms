@@ -1,127 +1,136 @@
 #include "deck.h"
 
-int _strcmp(const char *s1, const char *s2);
-char get_value(deck_node_t *card);
-void insertion_sort_deck_kind(deck_node_t **deck);
-void insertion_sort_deck_value(deck_node_t **deck);
+int strcmp(const char *str1, const char *str2);
+char getValue(deck_node_t *car);
+void insertionSortDeckKind(deck_node_t **deck);
+void insertionSortDeckValue(deck_node_t **deck);
 void sort_deck(deck_node_t **deck);
 
 /**
- * _strcmp - Compares two strings.
- * @s1: The first string to be compared.
- * @s2: The second string to be compared.
+ * strcmp - Compare two strings.
+ * @str1: The first string to be compared.
+ * @str2: The second string to be compared.
  *
- * Return: Positive byte difference if s1 > s2
- *         0 if s1 == s2
- *         Negative byte difference if s1 < s2
+ * Return:
+ * - An integer less than 0 if str1 is less than str2.
+ * - 0 if str1 is equal to str2.
+ * - An integer greater than 0 if str1 is greater than str2.
  */
-int _strcmp(const char *s1, const char *s2)
+int strcmp(const char *str1, const char *str2)
 {
-	while (*s1 && *s2 && *s1 == *s2)
+	while (*str1 && *str2 && *str1 == *str2)
 	{
-		s1++;
-		s2++;
+		str1++;
+		str2++;
 	}
 
-	if (*s1 != *s2)
-		return (*s1 - *s2);
+	if (*str1 != *str2)
+		return (*str1 - *str2);
 	return (0);
 }
 
 /**
- * get_value - Get the numerical value of a card.
- * @card: A pointer to a deck_node_t card.
+ * getValue - Assign a numerical value to a card's face value.
+ * @car: A pointer to the deck_node_t containing the card information.
  *
- * Return: The numerical value of the card.
+ * Return:
+ * - An integer representing the numerical value of the card's face value.
+ *   0 for "Ace", 1 for "1", 2 for "2", ..., 10 for "10", 11 for "Jack",
+ *   12 for "Queen", and 13 for other values.
  */
-char get_value(deck_node_t *card)
+char getValue(deck_node_t *car)
 {
-	if (_strcmp(card->card->value, "Ace") == 0)
+	if (strcmp(car->card->value, "Ace") == 0)
 		return (0);
-	if (_strcmp(card->card->value, "1") == 0)
+	if (strcmp(car->card->value, "1") == 0)
 		return (1);
-	if (_strcmp(card->card->value, "2") == 0)
+	if (strcmp(car->card->value, "2") == 0)
 		return (2);
-	if (_strcmp(card->card->value, "3") == 0)
+	if (strcmp(car->card->value, "3") == 0)
 		return (3);
-	if (_strcmp(card->card->value, "4") == 0)
+	if (strcmp(car->card->value, "4") == 0)
 		return (4);
-	if (_strcmp(card->card->value, "5") == 0)
+	if (strcmp(car->card->value, "5") == 0)
 		return (5);
-	if (_strcmp(card->card->value, "6") == 0)
+	if (strcmp(car->card->value, "6") == 0)
 		return (6);
-	if (_strcmp(card->card->value, "7") == 0)
+	if (strcmp(car->card->value, "7") == 0)
 		return (7);
-	if (_strcmp(card->card->value, "8") == 0)
+	if (strcmp(car->card->value, "8") == 0)
 		return (8);
-	if (_strcmp(card->card->value, "9") == 0)
+	if (strcmp(car->card->value, "9") == 0)
 		return (9);
-	if (_strcmp(card->card->value, "10") == 0)
+	if (strcmp(car->card->value, "10") == 0)
 		return (10);
-	if (_strcmp(card->card->value, "Jack") == 0)
+	if (strcmp(car->card->value, "Jack") == 0)
 		return (11);
-	if (_strcmp(card->card->value, "Queen") == 0)
+	if (strcmp(car->card->value, "Queen") == 0)
 		return (12);
 	return (13);
 }
 
 /**
- * insertion_sort_deck_kind - Sort a deck of cards from spades to diamonds.
- * @deck: A pointer to the head of a deck_node_t doubly-linked list.
+ * insertionSortDeckKind - Sort a deck of cards
+ * by their 'kind' using insertion sort.
+ * @deck: A pointer to a pointer to the head of
+ * the deck (deck_node_t) to be sorted.
+ * Return : Nothing.
  */
-void insertion_sort_deck_kind(deck_node_t **deck)
+void insertionSortDeckKind(deck_node_t **deck);
 {
-	deck_node_t *iter, *insert, *tmp;
+	deck_node_t *liter, *ins, *tmp;
 
-	for (iter = (*deck)->next; iter != NULL; iter = tmp)
+	for (liter = (*deck)->next; liter != NULL; liter = tmp)
 	{
-		tmp = iter->next;
-		insert = iter->prev;
-		while (insert != NULL && insert->card->kind > iter->card->kind)
+		tmp = liter->next;
+		ins = liter->prev;
+		while (ins != NULL && ins->card->kind > liter->card->kind)
 		{
-			insert->next = iter->next;
-			if (iter->next != NULL)
-				iter->next->prev = insert;
-			iter->prev = insert->prev;
-			iter->next = insert;
-			if (insert->prev != NULL)
-				insert->prev->next = iter;
+			ins->next = liter->next;
+			if (liter->next != NULL)
+				liter->next->prev = ins;
+			liter->prev = ins->prev;
+			liter->next = ins;
+			if (ins->prev != NULL)
+				ins->prev->next = liter;
 			else
-				*deck = iter;
-			insert->prev = iter;
-			insert = iter->prev;
+				*deck = liter;
+			ins->prev = liter;
+			ins = liter->prev;
 		}
 	}
 }
 
 /**
- * insertion_sort_deck_value - Sort a deck of cards sorted from
- *                             spades to diamonds from ace to king.
- * @deck: A pointer to the head of a deck_node_t doubly-linked list.
+ * insertionSortDeckValue - Sort a deck of cards by
+ * 'kind' and 'value' using insertion sort.
+ * @deck: A pointer to a pointer to the head
+ * of the deck (deck_node_t) to be sorted.
+ * Return : Nothing.
  */
-void insertion_sort_deck_value(deck_node_t **deck)
+void insertionSortDeckValue(deck_node_t **deck)
 {
-	deck_node_t *iter, *insert, *tmp;
+	deck_node_t *liter, *ins, *tmp;
 
-	for (iter = (*deck)->next; iter != NULL; iter = tmp)
+	for (liter = (*deck)->next; liter != NULL; liter = tmp)
 	{
-		tmp = iter->next;
-		insert = iter->prev;
-		while (insert != NULL &&
-		       insert->card->kind == iter->card->kind &&
-		       get_value(insert) > get_value(iter))
+		tmp = liter->next;
+		ins = liter->prev;
+		while (ins != NULL &&
+		       ins->card->kind == liter->card->kind &&
+		       getValue(ins) > getValue(liter))
 		{
-			insert->next = iter->next;
-			if (iter->next != NULL)
-				iter->next->prev = insert;
-			iter->prev = insert->prev;
-			iter->next = insert;
-			if (insert->prev != NULL)
-				insert->prev->next = iter;
+			ins->next = liter->next;
+			if (liter->next != NULL)
+				liter->next->prev = ins;
+			liter->prev = ins->prev;
+			liter->next = ins;
+			if (ins->prev != NULL)
+				ins->prev->next = liter;
 			else
-				*deck = iter;
-			insert->prev = iter;
-			insert = iter->prev;
+				*deck = liter;
+			ins->prev = liter;
+			ins = liter->prev;
 		}
 	}
 }
@@ -136,6 +145,6 @@ void sort_deck(deck_node_t **deck)
 	if (deck == NULL || *deck == NULL || (*deck)->next == NULL)
 		return;
 
-	insertion_sort_deck_kind(deck);
-	insertion_sort_deck_value(deck);
+	insertionSortDeckKind(deck);
+	insertionSortDeckValue(deck);
 }
