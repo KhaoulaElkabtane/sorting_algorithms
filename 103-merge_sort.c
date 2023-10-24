@@ -32,7 +32,7 @@ void mergeSubarr(int *sub, int *buffer, size_t frt, size_t m,
 	for (; j < b; j++)
 		buffer[r++] = sub[j];
 	for (i = frt, r = 0; i < b; i++)
-		sub[i] = buffer[k++];
+		sub[i] = buffer[r++];
 
 	printf("[Done]: ");
 	print_array(sub + frt, b - frt);
