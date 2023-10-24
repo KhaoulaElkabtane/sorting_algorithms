@@ -44,7 +44,7 @@ void maxHeapify(int *array, size_t size, size_t bas, size_t rt)
 	{
 		swap_ints(array + rt, array + lar);
 		print_array(array, size);
-		max_heapify(array, size, bas, lar);
+		maxHeapify(array, size, bas, lar);
 	}
 }
 
