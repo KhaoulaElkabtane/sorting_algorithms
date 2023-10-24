@@ -1,82 +1,82 @@
 #include "sort.h"
 
-void merge_subarr(int *subarr, int *buff, size_t front, size_t mid,
-		size_t back);
-void merge_sort_recursive(int *subarr, int *buff, size_t front, size_t back);
+void mergeSubarr(int *sub, int *buffer, size_t frt, size_t m,
+		size_t b);
+void mergeSortRecursive(int *sub, int *buffer, size_t frt, size_t b);
 void merge_sort(int *array, size_t size);
 
 /**
- * merge_subarr - Sort a subarray of integers.
- * @subarr: A subarray of an array of integers to sort.
- * @buff: A buffer to store the sorted subarray.
- * @front: The front index of the array.
- * @mid: The middle index of the array.
- * @back: The back index of the array.
+ * merge_subarr - Merge two subarrays into a single sorted array.
+ * @sub: Pointer to the original array containing two subarrays.
+ * @buffer: Temporary buffer to store the merged subarrays.
+ * @frt: Index of the beginning of the first subarray.
+ * @m: Index of the middle of the subarrays (end of the first subarray).
+ * @b: Index of the end of the second subarray.
+ * Rerun : Nothing.
  */
-void merge_subarr(int *subarr, int *buff, size_t front, size_t mid,
-		size_t back)
+void mergeSubarr(int *sub, int *buffer, size_t frt, size_t m,
+		size_t b)
 {
-	size_t i, j, k = 0;
+	size_t i, j, r = 0;
 
 	printf("Merging...\n[left]: ");
-	print_array(subarr + front, mid - front);
+	print_array(sub + frt, m - frt);
 
 	printf("[right]: ");
-	print_array(subarr + mid, back - mid);
+	print_array(sub + m, b - m);
 
-	for (i = front, j = mid; i < mid && j < back; k++)
-		buff[k] = (subarr[i] < subarr[j]) ? subarr[i++] : subarr[j++];
-	for (; i < mid; i++)
-		buff[k++] = subarr[i];
-	for (; j < back; j++)
-		buff[k++] = subarr[j];
-	for (i = front, k = 0; i < back; i++)
-		subarr[i] = buff[k++];
+	for (i = frt, j = m; i < m && j < b; r++)
+		buffer[k] = (sub[i] < sub[j]) ? sub[i++] : sub[j++];
+	for (; i < m; i++)
+		buffer[r++] = sub[i];
+	for (; j < b; j++)
+		buffer[r++] = sub[j];
+	for (i = frt, r = 0; i < b; i++)
+		sub[i] = buffer[k++];
 
 	printf("[Done]: ");
-	print_array(subarr + front, back - front);
+	print_array(sub + frt, b - frt);
 }
 
 /**
- * merge_sort_recursive - Implement the merge sort algorithm through recursion.
- * @subarr: A subarray of an array of integers to sort.
- * @buff: A buffer to store the sorted result.
- * @front: The front index of the subarray.
- * @back: The back index of the subarray.
+ * mergeSortRecursive - Recursively sorts an array using the merge sort algorithm.
+ * @sub: Pointer to the array to be sorted.
+ * @buffer: Temporary buffer used for merging.
+ * @frt: Index of the first element in the array.
+ * @b: Index of the last element in the array.
+ * Return : Nothing.
  */
-void merge_sort_recursive(int *subarr, int *buff, size_t front, size_t back)
+void mergeSortRecursive(int *sub, int *buffer, size_t frt, size_t b)
 {
-	size_t mid;
+	size_t m;
 
-	if (back - front > 1)
+	if (b - frt > 1)
 	{
-		mid = front + (back - front) / 2;
-		merge_sort_recursive(subarr, buff, front, mid);
-		merge_sort_recursive(subarr, buff, mid, back);
-		merge_subarr(subarr, buff, front, mid, back);
+		m = frt + (b - frt) / 2;
+		mergeSortRecursive(sub, buffer, frt, m);
+		mergeSortRecursive(sub, buffer, m, b);
+		mergeSubarr(sub, buffer, frt, m, b);
 	}
 }
 
 /**
- * merge_sort - Sort an array of integers in ascending
- *              order using the merge sort algorithm.
- * @array: An array of integers.
- * @size: The size of the array.
- *
- * Description: Implements the top-down merge sort algorithm.
+ * merge_sort - Sorts an array of integers in ascending order using merge sort.
+ * @array: Pointer to the array to be sorted.
+ * @size: Number of elements in the array.
+ * Return : Nothing.
  */
 void merge_sort(int *array, size_t size)
 {
-	int *buff;
+	int *buffer;
 
 	if (array == NULL || size < 2)
 		return;
 
-	buff = malloc(sizeof(int) * size);
-	if (buff == NULL)
+	buffer = malloc(sizeof(int) * size);
+	if (buffer == NULL)
 		return;
 
-	merge_sort_recursive(array, buff, 0, size);
+	mergeSortRecursive(array, buffer, 0, size);
 
 	free(buff);
 }
