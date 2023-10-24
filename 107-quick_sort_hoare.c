@@ -33,7 +33,7 @@ int hoarePartition(int *array, size_t size, int let, int rgh)
 {
 	int p, abo, blw;
 
-	p = array[right];
+	p = array[rgh];
 	for (abo = let - 1, blw = rgh + 1; abo < blw;)
 	{
 		do {
@@ -43,7 +43,7 @@ int hoarePartition(int *array, size_t size, int let, int rgh)
 			blw--;
 		} while (array[blw] > p);
 
-		if (ab < blw)
+		if (abo < blw)
 		{
 			swap_ints(array + abo, array + blw);
 			print_array(array, size);
@@ -68,7 +68,7 @@ void hoareSort(int *array, size_t size, int let, int rgh)
 	if (rgh - let > 0)
 	{
 		pat = hoarePartition(array, size, let, rgh);
-		hoareSort(array, size, let, part - 1);
+		hoareSort(array, size, let, pat - 1);
 		hoareSort(array, size, pat, rgh);
 	}
 }
