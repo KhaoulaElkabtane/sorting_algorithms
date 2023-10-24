@@ -1,95 +1,89 @@
 #include "sort.h"
 
-void swap_ints(int *a, int *b);
-int hoare_partition(int *array, size_t size, int left, int right);
-void hoare_sort(int *array, size_t size, int left, int right);
+void swap_ints(int *s, int *i);
+int hoarePartition(int *array, size_t size, int let, int rgh);
+void hoareSort(int *array, size_t size, int let, int rgh);
 void quick_sort_hoare(int *array, size_t size);
 
 /**
- * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * swap_ints - Swaps the values of two integers.
+ * @s: Pointer to the first integer.
+ * @i: Pointer to the second integer.
+ * Return : Nothing.
  */
-void swap_ints(int *a, int *b)
+void swap_ints(int *s, int *i)
 {
-	int tmp;
+        int tm;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	tm = *s;
+	*s = *i;
+	*i = tm;
 }
 
 /**
- * hoare_partition - Order a subset of an array of integers
- *                   according to the hoare partition scheme.
- * @array: The array of integers.
- * @size: The size of the array.
- * @left: The starting index of the subset to order.
- * @right: The ending index of the subset to order.
+ * hoarePartition - Partitions an array using the Hoare partition scheme.
+ * @array: Pointer to the array to be partitioned.
+ * @size: Size of the array.
+ * @let: Index of the left boundary for partitioning.
+ * @rgh: Index of the right boundary for partitioning.
  *
  * Return: The final partition index.
- *
- * Description: Uses the last element of the partition as the pivot.
- * Prints the array after each swap of two elements.
  */
-int hoare_partition(int *array, size_t size, int left, int right)
+int hoarePartition(int *array, size_t size, int let, int rgh)
 {
-	int pivot, above, below;
+	int p, abo, blw;
 
-	pivot = array[right];
-	for (above = left - 1, below = right + 1; above < below;)
+	p = array[right];
+	for (abo = let - 1, blw = rgh + 1; abo < blw;)
 	{
 		do {
-			above++;
-		} while (array[above] < pivot);
+			abo++;
+		} while (array[abo] < p);
 		do {
-			below--;
-		} while (array[below] > pivot);
+			blw--;
+		} while (array[blw] > p);
 
-		if (above < below)
+		if (ab < blw)
 		{
-			swap_ints(array + above, array + below);
+			swap_ints(array + abo, array + blw);
 			print_array(array, size);
 		}
 	}
 
-	return (above);
+	return (abo);
 }
 
 /**
- * hoare_sort - Implement the quicksort algorithm through recursion.
- * @array: An array of integers to sort.
- * @size: The size of the array.
- * @left: The starting index of the array partition to order.
- * @right: The ending index of the array partition to order.
- *
- * Description: Uses the Hoare partition scheme.
+ * hoareSort - Sorts an array using QuickSort with the Hoare partition scheme.
+ * @array: Pointer to the array to be sorted.
+ * @size: Size of the array.
+ * @let: Index of the left boundary for sorting.
+ * @rgh: Index of the right boundary for sorting.
+ * Return : Nothing.
  */
-void hoare_sort(int *array, size_t size, int left, int right)
+void hoareSort(int *array, size_t size, int let, int rgh)
 {
-	int part;
+	int pat;
 
-	if (right - left > 0)
+	if (rgh - let > 0)
 	{
-		part = hoare_partition(array, size, left, right);
-		hoare_sort(array, size, left, part - 1);
-		hoare_sort(array, size, part, right);
+		pat = hoarePartition(array, size, let, rgh);
+		hoareSort(array, size, let, part - 1);
+		hoareSort(array, size, pat, rgh);
 	}
 }
 
 /**
- * quick_sort_hoare - Sort an array of integers in ascending
- *                    order using the quicksort algorithm.
- * @array: An array of integers.
- * @size: The size of the array.
- *
- * Description: Uses the Hoare partition scheme. Prints
- * the array after each swap of two elements.
+ * quick_sort_hoare - Sorts an array using QuickSort 
+ * with the Hoare partition scheme.
+ * @array: Pointer to the array to be sorted.
+ * @size: Size of the array.
+ * Return : Nothing.
  */
 void quick_sort_hoare(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
 		return;
 
-	hoare_sort(array, size, 0, size - 1);
+	hoareSort(array, size, 0, size - 1);
 }
