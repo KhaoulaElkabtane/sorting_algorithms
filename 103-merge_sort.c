@@ -39,7 +39,8 @@ void mergeSubarr(int *sub, int *buffer, size_t frt, size_t m,
 }
 
 /**
- * mergeSortRecursive - Recursively sorts an array using the merge sort algorithm.
+ * mergeSortRecursive - Recursively sorts an array using 
+ * the merge sort algorithm.
  * @sub: Pointer to the array to be sorted.
  * @buffer: Temporary buffer used for merging.
  * @frt: Index of the first element in the array.
