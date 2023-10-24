@@ -76,7 +76,7 @@ char getValue(deck_node_t *car)
  * the deck (deck_node_t) to be sorted.
  * Return : Nothing.
  */
-void insertionSortDeckKind(deck_node_t **deck);
+void insertionSortDeckKind(deck_node_t **deck)
 {
 	deck_node_t *liter, *ins, *tmp;
 
