@@ -26,7 +26,7 @@ void mergeSubarr(int *sub, int *buffer, size_t frt, size_t m,
 	print_array(sub + m, b - m);
 
 	for (i = frt, j = m; i < m && j < b; r++)
-		buffer[k] = (sub[i] < sub[j]) ? sub[i++] : sub[j++];
+		buffer[r] = (sub[i] < sub[j]) ? sub[i++] : sub[j++];
 	for (; i < m; i++)
 		buffer[r++] = sub[i];
 	for (; j < b; j++)
@@ -78,5 +78,5 @@ void merge_sort(int *array, size_t size)
 
 	mergeSortRecursive(array, buffer, 0, size);
 
-	free(buff);
+	free(buffer);
 }
