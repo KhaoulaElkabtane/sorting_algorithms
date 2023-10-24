@@ -15,7 +15,7 @@ int getMax(int *array, int size)
 {
 	int m, i;
 
-	for (m = array[0]; i = 1; i < size; i++)
+	for (m = array[0], i = 1; i < size; i++)
 	{
 		if (array[i] > m)
 			m = array[i];
