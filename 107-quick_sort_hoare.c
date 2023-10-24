@@ -13,7 +13,7 @@ void quick_sort_hoare(int *array, size_t size);
  */
 void swap_ints(int *s, int *i)
 {
-        int tm;
+	int tm;
 
 	tm = *s;
 	*s = *i;
@@ -74,7 +74,7 @@ void hoareSort(int *array, size_t size, int let, int rgh)
 }
 
 /**
- * quick_sort_hoare - Sorts an array using QuickSort 
+ * quick_sort_hoare - Sorts an array using QuickSort
  * with the Hoare partition scheme.
  * @array: Pointer to the array to be sorted.
  * @size: Size of the array.
